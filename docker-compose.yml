@@ -1,4 +1,4 @@
-version: '3'
+version: '2'
 services:
     mysql:
         container_name: mysql
@@ -9,8 +9,8 @@ services:
         ports:
             - "3306:3306"
         volumes:
-            - ./data:/data/mysql
-            - ./conf/my.cnf:/etc/mysql/my.cnf
+            - ./mysql/data:/data/mysql
+            - ./mysql/conf/my.cnf:/etc/mysql/my.cnf
         environment:
             - MYSQL_ROOT_PASSWORD=123456
         networks:
@@ -22,10 +22,10 @@ services:
         container_name: php-fpm
         privileged: true
         volumes:
-            - ./etc/php-fpm.conf:/usr/local/etc/php-fpm.conf
-            - ./etc/php-fpm.d/:/usr/local/etc/php-fpm.d
-            - ./etc/php/php.ini:/usr/local/etc/php/php.ini
-            - ../log/php-fpm/:/var/log/php-fpm/
+            - ./php-fpm/etc/php-fpm.conf:/usr/local/etc/php-fpm.conf
+            - ./php-fpm/etc/php-fpm.d/:/usr/local/etc/php-fpm.d
+            - ./php-fpm/etc/php/php.ini:/usr/local/etc/php/php.ini
+            - ./log/php-fpm/:/var/log/php-fpm/
         depends_on:
             - mysql
         ports:
@@ -39,9 +39,10 @@ services:
         privileged: true
         container_name: nginx
         volumes:
-            - ./nginx.conf:/etc/nginx/nginx.conf
-            - ./conf.d:/etc/nginx/conf.d
-            - ../log/nginx/:/var/log/nginx/
+            - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+            - ./nginx/conf.d:/etc/nginx/conf.d
+            - ./log/nginx/:/var/log/nginx/
+            - /www/:/www/
         ports:
             - "80:80"
         links:
