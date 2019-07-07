@@ -6,7 +6,7 @@ services:
         privileged: true
         volumes:
             - /e/mysql-data:/var/lib/mysql
-            - ./lnmp/mysql/conf/my.cnf:/etc/mysql/my.cnf
+            - ./mysql/conf/my.cnf:/etc/mysql/my.cnf
         ports:
             - "3306:3306"
         environment:
@@ -18,9 +18,9 @@ services:
         image: crunchgeek/php-fpm:7.2
         privileged: true
         volumes:
-            - ../logs/php-fpm/:/var/log/php-fpm/
+            - /e//logs/php-fpm/:/var/log/php-fpm/
             - /e/www:/www
-            - ./lnmp/php-fpm/etc/php-fpm.d:/usr/local/etc/php-fpm.d
+            - ./php-fpm/etc/php-fpm.d:/usr/local/etc/php-fpm.d
         depends_on:
             - mysql
         ports:
@@ -32,8 +32,8 @@ services:
         image: nginx:1.17.1
         privileged: true
         volumes:
-            - ../logs/nginx/:/var/log/nginx/
-            - ./lnmp/nginx/conf.d:/etc/nginx/conf.d
+            - /e//logs/nginx/:/var/log/nginx/
+            - ./nginx/conf.d:/etc/nginx/conf.d
             - /e/www:/www
         ports:
             - "80:80"
