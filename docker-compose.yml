@@ -15,11 +15,12 @@ services:
             - app_net
     php-fpm:
         container_name: php-fpm
-        image: php:7.2.24-fpm-alpine3.10
+        image: php-fpm:latest
         privileged: true
         volumes:
             - ../lnmp_runtime/logs/php-fpm/:/var/log/php-fpm/
             - ../www:/www
+            - ./php-fpm/etc/php/php.ini:/usr/local/etc/php/php.ini
             - ./php-fpm/etc/php-fpm.d:/usr/local/etc/php-fpm.d
         depends_on:
             - mysql

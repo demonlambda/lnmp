@@ -1,0 +1,1 @@
+1. 使用命令 docker build -t php-fpm . 生成php镜像
