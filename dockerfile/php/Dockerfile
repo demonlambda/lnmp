@@ -1,5 +1,5 @@
 FROM php:7.2.24-fpm-alpine3.10
-RUN docker-php-ext-install pdo_mysql
+RUN docker-php-ext-install pdo_mysql opcache
 
 RUN curl -L -o /tmp/redis.tar.gz https://github.com/phpredis/phpredis/archive/5.0.2.tar.gz \
     && tar xfz /tmp/redis.tar.gz \
