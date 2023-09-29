@@ -15,7 +15,7 @@ services:
             - app_net
     php-fpm:
         container_name: php-fpm
-        image: php-fpm:latest
+        image: php:7.3-fpm-alpine3.12
         privileged: true
         volumes:
             - ../lnmp_runtime/logs/php-fpm/:/var/log/php-fpm/
@@ -38,7 +38,8 @@ services:
             - ./nginx/nginx.conf:/etc/nginx/nginx.conf
             - ../www:/www
         ports:
-            - "80:80"
+            - "8095:8095"
+            - "8096:8096"
         links:
             - php-fpm
         networks:
